@@ -12,3 +12,16 @@ for line in f:
 		students.append(s)
 
 f.close()
+
+codes = dict()
+for s in students:
+	found = 0
+	sCode = get_code(s)
+
+	for key in codes:
+		if key == sCode:
+			codes[sCode] += 1
+			found = 1
+
+		if found == 0:
+			codes[sCode] = 1
