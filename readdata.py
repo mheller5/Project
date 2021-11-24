@@ -13,6 +13,15 @@ for line in f:
 
 f.close()
 
-codes = list()
+codes = dict()
 for s in students:
-	codes.append(get_code(s))
+	found = 0
+	sCode = get_code(s)
+
+	for key in codes:
+		if key == sCode:
+			codes[sCode] += 1
+			found = 1
+
+		if found == 0:
+			codes[sCode] = 1
