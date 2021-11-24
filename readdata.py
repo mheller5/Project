@@ -12,3 +12,7 @@ for line in f:
 		students.append(s)
 
 f.close()
+
+codes = list()
+for s in students:
+	codes.append(get_code(s))
