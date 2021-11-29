@@ -2,17 +2,21 @@
 # By: Jack Galassi, Meghan Novak, Kaitlyn Fare, Meredith Heller
 
 from student import student
+from pybst import splaytree
+from pybst import bstree
 
 # read in each line (which is a student) to a list of students
 f = open('data.txt', 'r')
 
 students = list()
+i = 1;
 for line in f:
 	the_line = line.split(',')
 	if(len(the_line) == 3):
 		full_name = the_line[0] + " " + the_line[1]
-		s = student(full_name, the_line[2].rstrip())
+		s = student(full_name, the_line[2].rstrip(), i)
 		students.append(s)
+		i+=1
 
 f.close()
 
@@ -74,12 +78,25 @@ codes = dict()
 for s in students:
 	sCode = get_code(s.fname)
 
+	# the string is already in the hash, means splay tree is already in just add a node
 	if sCode in codes.keys():
-		codes[sCode] +=1
+		codes[sCode].insert(s.idnum, s)
+	# the string is not in the hash, add it and create new splay tree with information
 	else:
-		codes[sCode] = 1
-		
-print(codes)
+		codes[sCode] = splaytree.SplayTree([[s.idnum, s]])
 
 
 
+# TESTING:
+# a single student instance
+studentA = students[0]
+studentAHash = get_code(studentA.fname)
+studentATree = codes[studentAHash]
+
+# test get_element_count function
+count = studentATree.get_element_count()
+print count
+
+for hashString in codes:
+	count = codes[hashString].get_element_count()
+	print "number of elements in " + hashString + " is: " + str(count)
