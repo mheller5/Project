@@ -97,6 +97,10 @@ studentATree = codes[studentAHash]
 count = studentATree.get_element_count()
 print count
 
+# test A: check to make sure there are 15 splay trees with at least 8 nodes
+numBigSplays = 0
 for hashString in codes:
 	count = codes[hashString].get_element_count()
-	print "number of elements in " + hashString + " is: " + str(count)
+	if count > 7:
+		numBigSplays+=1
+print "There are " + str(numBigSplays) + " splays with at least 8 nodes."
