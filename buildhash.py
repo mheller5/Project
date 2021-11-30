@@ -104,3 +104,7 @@ for hashString in codes:
 	if count > 7:
 		numBigSplays+=1
 print "There are " + str(numBigSplays) + " splays with at least 8 nodes."
+
+# test B: level order traversal through each splay tree
+for hashString in codes:
+	code[hashString].levelorder
