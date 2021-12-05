@@ -95,7 +95,6 @@ studentATree = codes[studentAHash]
 
 # test get_element_count function
 count = studentATree.get_element_count()
-print count
 
 # test A: check to make sure there are 15 splay trees with at least 8 nodes
 numBigSplays = 0
