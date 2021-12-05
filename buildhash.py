@@ -3,22 +3,29 @@
 
 from student import student
 from pybst import splaytree
-from pybst import bstree
 
-# read in each line (which is a student) to a list of students
-f = open('data.txt', 'r')
+def main():
+	students = readdata('data.txt')
+	codes = buildhash(students)
 
-students = list()
-i = 1;
-for line in f:
-	the_line = line.split(',')
-	if(len(the_line) == 3):
-		full_name = the_line[0] + " " + the_line[1]
-		s = student(full_name, the_line[2].rstrip(), i)
-		students.append(s)
-		i+=1
 
-f.close()
+# read in each line (which is a student) to a list of students, return the list
+def readdata(filename):
+
+	f = open(filename, 'r')
+
+	students = list()
+	i = 1;
+	for line in f:
+		the_line = line.split(',')
+		if(len(the_line) == 3):
+			full_name = the_line[0] + " " + the_line[1]
+			s = student(full_name, the_line[2].rstrip(), i)
+			students.append(s)
+			i+=1
+
+	f.close()
+	return students
 
 # runs algorithm on a given string word to return the phonetic hashing string codestring
 def get_code(word):
@@ -72,38 +79,52 @@ def get_code(word):
 
 
 
-# go through the list of students and hash each name
-# currently incrementing the value, in the future implement splay tree
-codes = dict()
-for s in students:
-	sCode = get_code(s.fname)
+# go through the list of students and build python dictionary (hash table)
+# key in dictionary: student name hash string
+# value in dictionary: splay tree
+# if the key is already in the dictionary, add a node in the splay tree for that student
+# if the key is not in the dictionary, make a new splay tree and insert a node for that student
+# returns the dictionary
+def buildhash(students):
 
-	# the string is already in the hash, means splay tree is already in just add a node
-	if sCode in codes.keys():
-		codes[sCode].insert(s.idnum, s)
-	# the string is not in the hash, add it and create new splay tree with information
-	else:
-		codes[sCode] = splaytree.SplayTree([[s.idnum, s]])
+	codes = dict()
+	for s in students:
+		sCode = get_code(s.fname)
+		# the string is already in the hash, means splay tree is already in just add a node
+		if sCode in codes.keys():
+			codes[sCode].insert(s.idnum, s)
+		# the string is not in the hash, add it and create new splay tree with information
+		else:
+			codes[sCode] = splaytree.SplayTree([[s.idnum, s]])
+	
+	return codes
 
 
 
 # TESTING:
 # a single student instance
-studentA = students[0]
-studentAHash = get_code(studentA.fname)
-studentATree = codes[studentAHash]
+# studentA = students[0]
+# studentAHash = get_code(studentA.fname)
+# studentATree = codes[studentAHash]
 
 # test get_element_count function
-count = studentATree.get_element_count()
+# count = studentATree.get_element_count()
 
 # test A: check to make sure there are 15 splay trees with at least 8 nodes
-numBigSplays = 0
-for hashString in codes:
-	count = codes[hashString].get_element_count()
-	if count > 7:
-		numBigSplays+=1
-print "There are " + str(numBigSplays) + " splays with at least 8 nodes."
+# params: codes, a python dictionary containing value of type splay tree
+# prints how many splay trees have at least 8 nodes
+def testNumBigSplays(codes):
+
+	numBigSplays = 0
+	for hashString in codes:
+		count = codes[hashString].get_element_count()
+		if count > 7:
+			numBigSplays+=1
+	print "There are " + str(numBigSplays) + " splays with at least 8 nodes."
 
 # test B: level order traversal through each splay tree
 # for hashString in codes:
 	# code[hashString].levelorder
+
+if __name__ == "__main__":
+	main()
