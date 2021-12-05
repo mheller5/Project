@@ -4,9 +4,9 @@
 from student import student
 from pybst import splaytree
 
-def main():
-	students = readdata('data.txt')
-	codes = buildhash(students)
+# def main():
+	# students = readdata('data.txt')
+	# codes = buildhash(students)
 
 
 # read in each line (which is a student) to a list of students, return the list
@@ -96,7 +96,8 @@ def buildhash(students):
 		# the string is not in the hash, add it and create new splay tree with information
 		else:
 			codes[sCode] = splaytree.SplayTree([[s.idnum, s]])
-	
+	print codes['J525'].get_element_count()
+	stuff = codes['J525'].levelorder
 	return codes
 
 
@@ -126,5 +127,5 @@ def testNumBigSplays(codes):
 # for hashString in codes:
 	# code[hashString].levelorder
 
-if __name__ == "__main__":
-	main()
+# if __name__ == "__main__":
+	# main()

@@ -3,6 +3,11 @@
 import buildhash
 from student import student
 from pybst import splaytree
+from pybst import bstree
+import collections
+
+
+BSTree = bstree.BSTree
 
 
 def main():
@@ -10,8 +15,7 @@ def main():
 	students = buildhash.readdata('data.txt')
 	# create a python dictionary containing student splay trees
 	codes = buildhash.buildhash(students)
-	# printResults('J525', codes)
-	# printResults('H76', codes)
+	userSearch(codes)
 
 
 def userSearch(codes):
@@ -19,37 +23,33 @@ def userSearch(codes):
 	# prompt user for searches until they quit
 		# get the search string
 		# send it to print results
-		result = printResults(code, codes)
-			# prompt user to enter the number depending on their pick if printResults did not return 0
-			# call function to splay that student to the top
-		# continue looping through 
-		 
-#Meredith's part
-# prints the elements in the splay tree using a level order traversal so most recent are at top
-# Params:
-# 	code: the hash string of the looked up name
-# 	codes: the dictionary containing all hashes and their splay trees in the data
-# Return:
-# 	returns the number of students in the splay tree for its code in codes, or 0 if the search isn't in codes
-def printResults(code, codes):
-	studentNum = 0
-	# check whether the code is in the
-	if code in codes.keys():
-		numResults = codes[code].get_element_count()
-		# self.codes[code].levelorder()
-		
-		# print type(splaytree.levelorder(codes[code]))
-		print numResults
-		return numResults
-	else:
-		print 'Could not find any student matches. Please try spelling their name another way.'
-		return studentNum
+		# result = printResults(code, codes)
+
+		code = 'J525'
+		studentNum = 0
+		# check whether the code is in the
+		if code in codes.keys():
+			numResults = codes[code].get_element_count()
+			results = codes[code].postorder()
+			# go through list in reverse order
+			listIndex = numResults - 1
+			while listIndex >= 0:
+				studentNum +=1
+				print str(studentNum) + ': ' + results[listIndex].value.fname + ' ' + results[listIndex].value.email + ' ' + str(results[listIndex].value.idnum)
+				listIndex-=1
+			# ask user for the number they would like to pick or to press 0 if none are correct
+			userChoice = 3 # MEGHAN CHANGE THIS TO USER INPUT
+			key = results[numResults - userChoice].key
+			# updateSplayTree(code, codes, key)
+	
+		else:
+			print 'Could not find any student matches. Please try spelling their name another way.'
+		# prompt user for a new search or to quit
 		
 	
 # Jack's part
-# def updateSplayTree():
-	
-	
+# def updateSplayTree(code, codes, key):
+	# access the splay tree (the item in codes at code, find the node with key arg using the function in splaytree documentation)
 	
 
 
