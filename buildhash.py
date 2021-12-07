@@ -96,7 +96,7 @@ def buildhash(students):
 		# the string is not in the hash, add it and create new splay tree with information
 		else:
 			codes[sCode] = splaytree.SplayTree([[s.idnum, s]])
-	print codes['J525'].get_element_count()
+	#print codes['J525'].get_element_count()
 	stuff = codes['J525'].levelorder
 	return codes
 
