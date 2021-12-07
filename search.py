@@ -3,13 +3,8 @@
 import buildhash
 from student import student
 from pybst import splaytree
-from pybst import bstree
-import collections
 
-
-BSTree = bstree.BSTree
-
-
+# Main Driver
 def main():
 	# read the data into a list of student objects
 	students = buildhash.readdata('data.txt')
@@ -17,7 +12,15 @@ def main():
 	codes = buildhash.buildhash(students)
 	userSearch(codes)
 
-
+# Drives user search by continuously:
+# 	1. Asking for a student name
+# 	2. Read input and convert to hash
+# 	3. Retrieve and display level order hash splay results
+# 	4. Ask for a selection
+# 	5. Call to splay the selected result
+#	Until user enters q
+# Params:
+#		codes: the dictionary containing all hash's splay trees
 def userSearch(codes):
 
 	# prompt user for searches until they quit
