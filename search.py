@@ -57,16 +57,15 @@ def userSearch(codes):
 				continue
 
 			key = results[numResults - int(userChoice)].key
-			# updateSplayTree(code, codes, key)
+			updateSplayTree(code, codes, key)
 	
 		else:
 			print 'Could not find any student matches. Please try spelling their name another way.'
 		
 	
-# Jack's part
-# **** After you finish your code, uncomment line 58 so that the part above can implement your function ****
-# def updateSplayTree(code, codes, key):
+def updateSplayTree(code, codes, key):
 	# access the splay tree (the item in codes at code, find the node with key arg using the function in splaytree documentation)
+	codes[code].get_node(key)
 	
 
 
