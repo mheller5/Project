@@ -47,7 +47,7 @@ def userSearch(codes):
 			listIndex = numResults - 1
 			while listIndex >= 0:
 				studentNum +=1
-				print str(studentNum) + ': ' + results[listIndex].value.fname + ' ' + results[listIndex].value.email + ' ' + str(results[listIndex].value.idnum)
+				print(str(studentNum) + ': ' + results[listIndex].value.fname + ' ' + results[listIndex].value.email + ' ' + str(results[listIndex].value.idnum))
 				listIndex-=1
 
 			# ask user for the number they would like to pick or to press 0 if none are correct
@@ -60,9 +60,13 @@ def userSearch(codes):
 			updateSplayTree(code, codes, key)
 	
 		else:
-			print 'Could not find any student matches. Please try spelling their name another way.'
+			print('Could not find any student matches. Please try spelling their name another way.')
 		
-	
+# calls pybst splaytree function to splay the tree
+# Params:
+#		code: the hash string that has been searched
+#		codes: the dictionary containing hash code keys and splay tree values
+#		key: the node key that the user selected
 def updateSplayTree(code, codes, key):
 	# access the splay tree (the item in codes at code, find the node with key arg using the function in splaytree documentation)
 	codes[code].get_node(key)
